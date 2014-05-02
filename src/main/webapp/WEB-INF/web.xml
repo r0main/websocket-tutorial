@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+    <display-name>Simple tutorial for Atmosphere framwork</display-name>
+    <description>
+        This show you a very simple demo of Atmosphere framework.
+        See how easy it is to use websockets !
+    </description>
+
+    <servlet>
+        <servlet-name>TweetPublisher</servlet-name>
+        <servlet-class>com.gervais.romain.web.notification.TweetPublisher</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TweetPublisher</servlet-name>
+        <url-pattern>/tweetpublisher</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <description>AtmosphereServlet</description>
+        <servlet-name>AtmosphereServlet</servlet-name>
+        <servlet-class>org.atmosphere.cpr.AtmosphereServlet</servlet-class>
+        <!-- Scan for Atmosphere annotations like @ManagedService -->
+        <init-param>
+            <param-name>org.atmosphere.cpr.packages</param-name>
+            <param-value>com.gervais.romain.web</param-value>
+        </init-param>
+        <load-on-startup>0</load-on-startup>
+        <async-supported>true</async-supported>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AtmosphereServlet</servlet-name>
+        <url-pattern>/notifications/*</url-pattern>
+    </servlet-mapping>
+</web-app>
